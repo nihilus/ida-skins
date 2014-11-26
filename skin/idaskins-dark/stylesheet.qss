@@ -10,6 +10,7 @@ QCheckBox {
 QTextEdit {
     background-color: #2d2d2d;
     border: 1px solid #363636;
+    border-radius: 2px;
 }
 
 QMenuBar, QMenuBar::item {
@@ -17,9 +18,14 @@ QMenuBar, QMenuBar::item {
     color: #ddd;
 }
 
+QMenu::item:selected {
+    background-color: #2A2A2A;
+}
+
 QLineEdit {
     border: 1px solid #474747;
     min-height: 20px;
+    border-radius: 2px;
 }
 
 QLineEdit:hover, QLineEdit:focus {
@@ -35,20 +41,15 @@ QTabBar::tab:selected {
     background-color: #777777;
 }
 
-QTreeView::item {
-    font-size: 8px;
-}
-
 QHeaderView::section {
     background-color: #444;
     border-left: 3px solid #666;
-
 }
 
 QTableView {
     border: 1px solid #474747;
     background-color: #2d2d2d;
-    color: #888;
+    
 }
 
 QTableCornerButton::section {
@@ -57,10 +58,31 @@ QTableCornerButton::section {
  }
 
 IDAView, hexview_t, CustomIDAMemo {
-    font-family: "Consolas";
-    font-size: 9pt;
-    border: none;
+	border: none;
 }
+
+CustomIDAMemo {
+    font-family: "<TEXT_INPUT_FONT_FAMILY>";
+    font-size: <TEXT_INPUT_FONT_SIZE>;
+    font-style: <TEXT_INPUT_FONT_STYLE>;
+    font-weight: <TEXT_INPUT_FONT_WEIGHT>;
+}
+
+IDAView {
+    font-family: "<DISASSEMBLY_FONT_FAMILY>";
+    font-size: <DISASSEMBLY_FONT_SIZE>;
+    font-style: <DISASSEMBLY_FONT_STYLE>;
+    font-weight: <DISASSEMBLY_FONT_WEIGHT>;
+}
+
+hexview_t {
+    font-family: "<HEXVIEW_FONT_FAMILY>";
+    font-size: <HEXVIEW_FONT_SIZE>;
+    font-style: <HEXVIEW_FONT_STYLE>;
+    font-weight: <HEXVIEW_FONT_WEIGHT>;
+}
+
+/* TODO: DEBUG_REGISTERS, OUTPUT_WINDOW */
 
 QScrollBar {
     background-color: #363636;
@@ -104,7 +126,7 @@ QPushButton {
     border-radius: 2px;
 }
 
-QPushButton:hover {
+QPushButton:hover, QPushButton:default {
     border: 1px solid #0aa;
 }
 
@@ -114,16 +136,7 @@ QPushButton:pressed {
 
 QComboBox {
     border: 1px solid #474747;
-}
-
-GraphQObject {
-    background-color: red;
-    padding: 100px;
-}
-
-ChooserContainer {
-    border: 1px solid green;
-    border-radius: 4px;
+    border-radius: 2px;
 }
 
 QComboBox > QLineEdit, QComboBox > QLineEdit:hover, QComboBox > QLineEdit:focus {
@@ -149,6 +162,7 @@ QComboBox::down-arrow {
     image: url(<SKINDIR>/icons/expand.png);
 }
 
+/* Close, maximize and undock button for dock widgets */
 IDADockWidget > QWidget > QAbstractButton {
     background-color: #666;
     border-radius: 3px;
@@ -163,4 +177,34 @@ TNavBand > QPushButton, RegJumpButton {
 	min-width: 0;
 	padding: 0 0 0 0;
 	border: none;
+}
+
+EditContainer, ChooserContainer, QGroupBox, QListView, QTreeView {
+    border: 1px solid #606060;
+    border-radius: 2px;
+}
+
+QGroupBox {
+    margin-top: 5px;
+}
+
+QGroupBox::title {
+    subcontrol-origin: margin;
+    subcontrol-position: top center;
+}
+
+/* Remove border from IDC/Python switch button */
+CLIWidget > QGroupBox > QPushButton, 
+CLIWidget > QGroupBox > QPushButton:hover,
+CLIWidget > QGroupBox > QPushButton:focus {
+    border: none;
+}
+
+CLIWidget > QGroupBox {
+    margin-top: 0;
+}
+
+QTreeView::item:selected, QListView::item:selected, QTableView::item:selected {
+    background-color: #474747;
+    color: #ddd;
 }

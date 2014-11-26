@@ -2,5 +2,6 @@
 <theme name="IDASkins dark"
 	author="athre0z"
 	version="v1.0"
-	preview_image="preview.png">
+	preview_image="preview.png"
+	notes="Combine with idaConsonance text-color theme for maximum epicness!">
 </theme>

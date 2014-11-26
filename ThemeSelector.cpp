@@ -62,7 +62,7 @@ void ThemeSelector::refresh()
         }
         catch (const ThemeManifest::XInvalidManifest &e) 
         {
-            msg("["PLUGIN_NAME"] %s: %s\n", it->toUtf8().data(), e.what());
+            msg("[" PLUGIN_NAME "] %s: %s\n", it->toUtf8().data(), e.what());
         }
     }
 
@@ -81,11 +81,12 @@ void ThemeSelector::themeSelected()
     Q_ASSERT(m_widgets.lwSkinSelection->selectionModel());
     auto selectedIndicies = m_widgets.lwSkinSelection->selectionModel()->selectedIndexes();
     Q_ASSERT(selectedIndicies.count() == 1);
-    Q_ASSERT(selectedIndicies.first().row() < m_curThemeList.count());
+    Q_ASSERT(static_cast<std::size_t>(selectedIndicies.first().row()) < m_curThemeList->size());
     const auto &entry = m_curThemeList->at(selectedIndicies.first().row());
 
     m_widgets.lblAuthorVal->setText(entry.second->themeAuthor());
     m_widgets.lblVersionVal->setText(entry.second->themeVersion());
+    m_widgets.lblNotesVal->setText(entry.second->themeNotes());
 
     if (!entry.second->themePreviewImage().isEmpty())
     {
@@ -93,7 +94,8 @@ void ThemeSelector::themeSelected()
             = QPixmap(entry.first.absolutePath() + "/" + entry.second->themePreviewImage());
     }
     else
-        m_curPreviewImage = NULL;
+        m_curPreviewImage = nullptr;
+
     updatePreview();
 }
 
@@ -110,7 +112,7 @@ void ThemeSelector::updatePreview()
     }
 }
 
-void ThemeSelector::resizeEvent(QResizeEvent * event)
+void ThemeSelector::resizeEvent(QResizeEvent *event)
 {
     this->QDialog::resizeEvent(event);
     updatePreview();
